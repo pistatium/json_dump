@@ -8,7 +8,7 @@ WebAPIなどを使う関係で必要になったので作ってみました。
 使い方
 ------
 HTML とJS製なのでファイルを設置するだけで動きます。
-[デモ] (http://dl.dropbox.com/u/7647582/tools/json_dump/json_dump.html json_dump.html)
+[デモ] (http://dl.dropbox.com/u/7647582/tools/json_dump/json_dump.html "json_dump.html")
 
 JSON形式のテキストをフォームに貼り付けて、
 ｢Dump JSON｣を押せば見やすく表示してくれます。

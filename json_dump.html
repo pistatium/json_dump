@@ -16,13 +16,13 @@
         <h1>JSON DUMP <small>The fastest visualiser for JSON format.</small></h1>
     </div>
     
-    <div>
-        <textarea class="span12" id="raw_json" cols=70 rows=5 placeholder="Please copy and paste the text in JSON format here."></textarea>
+    <div class="span12">
+        <textarea class="span12" id="raw_json" cols=70 rows=5 placeholder="Please copy and paste the text in JSON format here."></textarea><br>
+            <a class="btn btn-info" id="dump_btn">Dump JSON</a>
+            <a class="btn" id="reset_btn">Reset</a>
+            <a class="btn pull-right" id="sample_btn">Sample JSON</a>
     </div>
-    
-    <a class="btn" id="dump_btn">Dump JSON</a>
-    <a class="btn" id="reset_btn">Reset</a>
-    <a class="btn btn-info" id="sample_btn">Sample JSON</a>
+    <br clear="all">
         
     <div id="result"></div>
     
@@ -37,6 +37,8 @@
             <span class="jpn_txt">上のテキストボックスにJSONを貼り付けて、[Dump JSON]ボタンを押せば</span><br>
             Immediately yout data is displayed in the form of easy-to-see .<br>
             <span class="jpn_txt">即座に見やすい形で表示してくれます。</span><br>
+            Extra things such as call-back will be removed automatically.<br>
+            <span class="jpn_txt">また、コールバックなど余計なものが付いていても自動で除去します。</span><br>
             Please use it for development, such as using the API.<br>
             <span class="jpn_txt">APIを使った開発などにお使いください。</span><br>
             <b>Note:</b> UTF-8 Charset Only.    
@@ -54,7 +56,6 @@
 
 <script>
     $(function(){
-    
         var main = function(){
             autoSaveAndLoad("raw_json");
             $("#result").hide();
@@ -84,6 +85,14 @@
     {"id":10003,"name":"Carol","age":22,"extra":{"birthday":"04/01","locate":"Tokyo"} \n\
 }]}';
             $("#raw_json").val(sampleJSON);
+            var json = $("#raw_json").val();
+            var result = dump(json);
+            if(result){
+                $("#result").hide();
+                $("#result").html(result);
+                $("#result").show("fast");
+                setListner();
+            }
         });
         
         var dump = function(json){
@@ -92,8 +101,26 @@
             return makeHtml(obj);
         }
         
-        var trimPadding = function(json){
-            return json.match(/\{[\s\S]*\}/);
+        var trimPadding = function(jsonp){
+            var match = null;
+            var json_obj = '';
+            var json_array = '';
+            
+            //外側が{}の時
+            match = jsonp.match(/\{[\s\S]*\}/);
+            if(match){
+                var json_obj = match.toString();
+            }
+            
+            //外側が[]の時
+            match = jsonp.match(/\[[\s\S]*\]/);
+            if(match){
+                var json_array = json_array.toString();
+            }
+            if (json_array.length > json_obj.length) {
+                return json_array;
+            }
+            return json_obj;
         }
         
         var parseJSON = function(json){
@@ -101,6 +128,7 @@
                 var obj = JSON.parse(json);
             } catch(e){
                 alert("[ERROR] Wrong JSON Format\n\n" + e);
+                console.debug(json);
             }
             return obj;
         }
@@ -129,11 +157,11 @@
                 
             } else {
                 return "<span class='val'>"
-                     + obj
+                     + _escape(obj)
                      + "</span>"
-                     + "<span class='place'>"
+                     + '<input class="place" size=100 value="data'
                      + nest
-                     + "</span>"
+                     + '" onclick="this.select();" />'
                      + "<br>";
             }
         }
@@ -145,7 +173,21 @@
             $(".array").click(function(){
                 $(this).next(".indent").toggle("fast");
             });
+            $('.place').click(function(){
+                //alert(this.innerText);
+            });
+
         }
+        var _escape = function(ch) {
+            if(typeof ch !== 'string')return ch;
+            ch = ch.replace(/&/g,"&amp;") ;
+            ch = ch.replace(/"/g,"&quot;") ;
+            ch = ch.replace(/'/g,"&#039;") ;
+            ch = ch.replace(/</g,"&lt;") ;
+            ch = ch.replace(/>/g,"&gt;") ;
+            return ch ;
+        }
+        
         main(); 
     });
     

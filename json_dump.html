@@ -115,8 +115,9 @@
             //外側が[]の時
             match = jsonp.match(/\[[\s\S]*\]/);
             if(match){
-                var json_array = json_array.toString();
+                var json_array = match.toString()
             }
+            
             if (json_array.length > json_obj.length) {
                 return json_array;
             }

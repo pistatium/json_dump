@@ -66,6 +66,7 @@ textarea{
     margin: 0px 0 5px 0px;
     text-decoration: underline;
     border:0px dashed;
+    width:350px;
 }
 
 .no_val{

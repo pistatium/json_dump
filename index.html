@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The Fastest JSON visualiser</title>
+<link rel="stylesheet" href="http://dl.dropbox.com/u/7647582/jsedit/bootstrap.min.css" type="text/css">
+<link rel="stylesheet" href="json_dump.css" type="text/css">
+<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<script src="autosave.js"></script>
+<style>
+
+</style>
+</head>
+<body><div class="container-fluid">
+    <div class="page-header">
+        <h1>The Fastest JSON visualiser <small> The tool handling JSON format.</small></h1>
+        <h1 class="jpn_txt">最速のJSONビジュアライザー</h1>
+    </div>
+    
+    <div class="span12">
+        <textarea class="span12" id="raw_json" cols=70 rows=5 placeholder="Please copy and paste the text in JSON format here."></textarea><br>
+            <a class="btn btn-info" id="dump_btn">Dump JSON</a>
+            <a class="btn" id="reset_btn">Reset</a>
+            <a class="btn pull-right" id="sample_btn">Sample JSON</a>
+    </div>
+    <br clear="all">
+        
+    <div id="result"></div>
+    
+    <hr>
+    
+    <div id="description">
+        <h2>How To Use</h2>
+        <p>
+            This service can easily view the data in the form of JSON.<br>
+            <span class="jpn_txt">このサービスはJSON形式のデータを見やすく表示します。</span><br>
+            Paste the JSON String into the box, and press the [Dump JSON] Button.<br>
+            <span class="jpn_txt">上のテキストボックスにJSONを貼り付けて、[Dump JSON]ボタンを押せば</span><br>
+            Immediately yout data is displayed in the form of easy-to-see .<br>
+            <span class="jpn_txt">即座に見やすい形で表示してくれます。</span><br>
+            Extra things such as call-back will be removed automatically.<br>
+            <span class="jpn_txt">また、コールバックなど余計なものが付いていても自動で除去します。</span><br>
+            Please use it for development, such as using the API.<br>
+            <span class="jpn_txt">APIを使った開発などにお使いください。</span><br>
+            <b>Note:</b> UTF-8 Charset Only. 
+        </p>
+        
+        <h2>Tips</h2>
+        <p>
+            The green part becomes the course from a root.<br>
+            <span class="jpn_txt">緑色の部分はルートからのパスになってます。</span><br>
+            If it is Javascript, You only just copy and paste it for your program.<br>
+            <span class="jpn_txt">Javascriptであればそのままコピペして使えます。</span><br>
+            If you use other script language, it gose well in the same way.<br>
+            <span class="jpn_txt">他のスクリプト言語ユーザーでも同じように辿れば平気です。</span><br>
+            In the case of sequence, a child can furl when you click a parent-element.<br>
+            <span class="jpn_txt">配列の場合、親要素をクリックすると子が畳まれます。</span><br>
+            When JSON data are big, please use it.<br>
+            <span class="jpn_txt">JSONデータが大きい場合にご利用ください。</span><br>
+        </p>
+        
+        <h2>System</h2>
+        <p>
+            This program is only written by Javascript.<br>
+            <span class="jpn_txt">このプログラムはJavascriptのみによって書かれています。</span><br>
+            Because there is no need to send the data to an external server, you can use fast and safe.<br>
+            <span class="jpn_txt">外部のサーバーに情報を送る必要がないため、高速かつ安全に利用出来ます。</span><br>
+        </p>
+        
+        <h2>Source</h2>
+        <p>
+             This source is hosted on <a href="https://github.com/pistatium/json_dump">GitHub</a>:
+        </p>
+    </div>
+</div>
+<hr>
+<div class="footer">
+Copyright(c) 2011-2013 <a href="http://kimihiro-n.appspot.com">Pistatium</a>. All Rights Reserved.
+</div>
+</body>
+
+<script>
+    $(function(){
+        var main = function(){
+            autoSaveAndLoad("raw_json");
+            $("#result").hide();
+        }
+        
+        $("#dump_btn").click(function(){
+            var json = $("#raw_json").val();
+            var result = dump(json);
+            if(result){
+                $("#result").hide();
+                $("#result").html(result);
+                $("#result").show("fast");
+                setListner();
+            }
+        });
+        
+        $("#reset_btn").click(function(){
+            $("#raw_json").val('');
+            $("#result").html('');
+        });
+        
+        $("#sample_btn").click(function(){
+            var sampleJSON ='\
+{"team":"Team A","number":3,"users":[ \n\
+    {"id":10001,"name":"Alice","age":18}, \n\
+    {"id":10002,"name":"Bob","age":14}, \n\
+    {"id":10003,"name":"Carol","age":22,"extra":{"birthday":"04/01","locate":"Tokyo"} \n\
+}]}';
+            $("#raw_json").val(sampleJSON);
+            var json = $("#raw_json").val();
+            var result = dump(json);
+            if(result){
+                $("#result").hide();
+                $("#result").html(result);
+                $("#result").show("fast");
+                setListner();
+            }
+        });
+        
+        var getExtraParams = function(){
+            
+        
+        };
+        var dump = function(json){
+            json = trimPadding(json);
+            var obj = parseJSON(json);
+            return makeHtml(obj);
+        };
+        
+        var trimPadding = function(jsonp){
+            var match = null;
+            var json_obj = '';
+            var json_array = '';
+            
+            //外側が{}の時
+            match = jsonp.match(/\{[\s\S]*\}/);
+            if(match){
+                var json_obj = match.toString();
+            }
+            
+            //外側が[]の時
+            match = jsonp.match(/\[[\s\S]*\]/);
+            if(match){
+                var json_array = match.toString()
+            }
+            
+            if (json_array.length > json_obj.length) {
+                return json_array;
+            }
+            return json_obj;
+        }
+        
+        var parseJSON = function(json){
+            try{
+                var obj = JSON.parse(json);
+            } catch(e){
+                alert("[ERROR] Wrong JSON Format\n\n" + e);
+                console.debug(json);
+            }
+            return obj;
+        }
+        
+        var makeHtml = function(obj){
+            return "<span class='key'>ROOT</span>" + _make(obj, "");
+        }
+        
+        var _make = function(obj, nest){
+            if (obj == null) {
+                return "<span class='val no_val'>(null)</span>"
+                     + "<span class='place'>"
+                     + nest 
+                     + "</span>"
+                     + "<br>";
+                
+            } else if (typeof obj == 'object') {
+                var tmp ="<span class='array'>(array)<br></span><div class='indent'>"
+                for(o in obj){ 
+                    tmp += "<span class='key'>"
+                         + o
+                         + "</span>:" 
+                         + _make(obj[o], nest + "['" + o + "']");
+                }
+                return tmp + "</div>";
+                
+            } else {
+                return "<span class='val'>"
+                     + _escape(obj)
+                     + "</span>"
+                     + '<input class="place" size=100 value="data'
+                     + nest
+                     + '" onclick="this.select();" />'
+                     + "<br>";
+            }
+        }
+        
+        var setListner = function(){
+            $(".key").click(function(){
+                $(this).next(".array").next(".indent").toggle("fast");
+            });
+            $(".array").click(function(){
+                $(this).next(".indent").toggle("fast");
+            });
+            $('.place').click(function(){
+                //alert(this.innerText);
+            });
+
+        }
+        var _escape = function(ch) {
+            if(typeof ch !== 'string')return ch;
+            ch = ch.replace(/&/g,"&amp;") ;
+            ch = ch.replace(/"/g,"&quot;") ;
+            ch = ch.replace(/'/g,"&#039;") ;
+            ch = ch.replace(/</g,"&lt;") ;
+            ch = ch.replace(/>/g,"&gt;") ;
+            return ch ;
+        }
+        
+        main(); 
+    });
+    
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-3817632-8']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</html>

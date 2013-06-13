@@ -90,6 +90,7 @@ textarea{
     margin-left:10px;
     padding:10px;
     border-left: 5px solid #9CCCCC;
+    width:660px; float:left;
 }
 
 .gotop{
@@ -97,4 +98,8 @@ textarea{
 	right: 0px;
 	bottom: 30px; 
 	width:100px;
+}
+#ads{
+width:250px;
+float:left;
 }

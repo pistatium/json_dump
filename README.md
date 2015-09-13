@@ -1,4 +1,4 @@
-﻿JSON Visualiser (旧JSON DUMP)
+﻿JSON Visualiser
 ======================
 
 JSON形式の文字列を見やすくするためのJavascript製アプリです。  

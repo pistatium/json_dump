@@ -1,4 +1,4 @@
-﻿JSON Visualiser
+﻿JSON visualizer
 ======================
 
 JSON形式の文字列を見やすくするためのJavascript製アプリです。  

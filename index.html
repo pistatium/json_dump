@@ -2,7 +2,7 @@
 <html  manifest="/json_dump.appcache">
 <head>
 <meta charset="utf-8" />
-<title>The Fastest JSON visualiser</title>
+<title>The Fastest JSON visualizer - 最速のJSON可視化･解析ツール</title>
 <link rel="stylesheet" href="http://dl.dropbox.com/u/7647582/jsedit/bootstrap.min.css" type="text/css">
 <link rel="stylesheet" href="json_dump.css" type="text/css">
 <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
@@ -19,15 +19,21 @@
 </head>
 <body><div class="container-fluid">
     <div class="page-header">
-        <h1>The Fastest JSON visualiser <small> The tool handling JSON format.</small></h1>
-        <h1 class="jpn_txt">最速のJSONビジュアライザー</h1>
+        <h1>The Fastest JSON visualizer <small> The tool handling JSON format.</small></h1>
+        <h1 class="jpn_txt">最速のJSON可視化･解析ツール</h1>
     </div>
     
     <div class="span12">
-        <textarea class="span12" id="raw_json" cols=70 rows=5 placeholder="Please copy and paste the text in JSON format here."></textarea><br>
-            <a class="btn btn-info" id="dump_btn">Dump JSON</a>
+        <a class="btn pull-right" id="sample_btn" style="display:block; margin-bottom:5px;">
+            Try Sample JSON
+        </a>
+        
+        <textarea class="span12" id="raw_json" cols=70 rows=7 placeholder="Please copy and paste the text in JSON format here."></textarea>
+        <p>
+            <a class="btn btn-info" id="dump_btn">Visualize JSON</a>
             <a class="btn" id="reset_btn">Reset</a>
-            <a class="btn pull-right" id="sample_btn">Sample JSON</a>
+        </p>
+            
     </div>
     <br clear="all">
         
@@ -58,11 +64,13 @@
                 If it is Javascript, You only just copy and paste it for your program.<br>
                 <span class="jpn_txt">Javascriptであればそのままコピペして使えます。</span><br>
                 If you use other script language, it gose well in the same way.<br>
-                <span class="jpn_txt">他のスクリプト言語ユーザーでも同じように辿れば平気です。</span><br>
+                <span class="jpn_txt">他のスクリプト言語ユーザーでも同じように構造を辿っていけば使えると思います。</span><br>
+
                 In the case of sequence, a child can furl when you click a parent-element.<br>
                 <span class="jpn_txt">配列の場合、親要素をクリックすると子が畳まれます。</span><br>
                 When JSON data are big, please use it.<br>
                 <span class="jpn_txt">JSONデータが大きい場合にご利用ください。</span><br>
+
             </p>
             
             <h2>System</h2>
@@ -70,12 +78,21 @@
                 This program is only written by Javascript.<br>
                 <span class="jpn_txt">このプログラムはJavascriptのみによって書かれています。</span><br>
                 Because there is no need to send the data to an external server, you can use fast and safe.<br>
-                <span class="jpn_txt">外部のサーバーに情報を送る必要がないため、高速かつ安全に利用出来ます。</span><br>
+                <span class="jpn_txt">外部のサーバーにJSONの情報を送る必要がないため、高速かつ安全に利用出来ます。</span><br>
             </p>
             
             <h2>Source</h2>
             <p>
                  This source is hosted on <a href="https://github.com/pistatium/json_dump">GitHub</a>:
+            </p>
+            <h2>For Android</h2>
+            <p>
+                "The Fastest JSON visualizer" is available on Android.<br>
+                <span class="jpn_txt">Androidでもこの最速のJsonVisualizerが利用できます。</span><br>
+                <a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.jsonvisualizer" class="btn">
+                    <img src="http://houkago-no.appspot.com/uploadapp/icon/6248215343005696" width=50>
+                    　Download
+                </a>
             </p>
         </div>
         
@@ -93,7 +110,7 @@
 
 <hr>
 <div class="footer">
-Copyright(c) 2011-2013 <a href="http://kimihiro-n.appspot.com">Pistatium</a>. All Rights Reserved.
+Copyright(c) 2011-2014 <a href="http://kimihiro-n.appspot.com">Pistatium</a>. All Rights Reserved.
 </div>
 
 <div class="gotop"><a href="#top">↑Go to Top</a></div>

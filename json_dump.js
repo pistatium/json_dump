@@ -1,10 +1,3 @@
-/*
-* JSON Visualiser(dump)‚ÌƒƒCƒ“ƒƒWƒbƒN
-*  —v: jQuery & autoload.js
-*
-*
-*/
-
 $(function(){
         var main = function(){
             autoSaveAndLoad("raw_json");
@@ -13,6 +6,10 @@ $(function(){
         
         $("#dump_btn").click(function(){
             var json = $("#raw_json").val();
+            if (! json) {
+                alert("Before visualize, please fill json into blank above.\nè§£æã—ãŸã„JSONã‚’å…¥ã‚Œã¦ãã ã•ã„ã€‚");
+                return ;
+            }
             var result = dump(json);
             if(result){
                 $("#result").hide();
@@ -52,6 +49,9 @@ $(function(){
         var dump = function(json){
             json = trimPadding(json);
             var obj = parseJSON(json);
+            var formatted_json = JSON.stringify(obj, null, 4);
+            console.log(formatted_json);
+            $("#raw_json").val(formatted_json);
             return makeHtml(obj);
         };
         
@@ -60,13 +60,11 @@ $(function(){
             var json_obj = '';
             var json_array = '';
             
-            //ŠO‘¤‚ª{}‚Ì
             match = jsonp.match(/\{[\s\S]*\}/);
             if(match){
                 var json_obj = match.toString();
             }
             
-            //ŠO‘¤‚ª[]‚Ì
             match = jsonp.match(/\[[\s\S]*\]/);
             if(match){
                 var json_array = match.toString()
@@ -120,7 +118,8 @@ $(function(){
                      + "<br>";
             }
         }
-        
+
+
         var setListner = function(){
             $(".key").click(function(){
                 $(this).next(".array").next(".indent").toggle("fast");

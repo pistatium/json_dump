@@ -1,4 +1,6 @@
 $(function(){
+        var latestFile = 0;
+        var latestFileName = "";
         var main = function(){
             autoSaveAndLoad("raw_json");
             $("#result").hide();
@@ -127,7 +129,7 @@ $(function(){
             $(".array").click(function(){
                 $(this).next(".indent").toggle("fast");
             });
-            $('.place').click(function(){
+            $(".place").click(function(){
                 //alert(this.innerText);
             });
 
@@ -142,5 +144,30 @@ $(function(){
             return ch ;
         }
         
+        $("#browse_btn").click(function(){
+            $("#fileNameText").text("");
+            $("#inputFile").val("");
+            $('#inputFile').click();
+        });        
+                
+        $("#inputFile").change(function(inputEvent) {
+            let timeout_id = setTimeout(selectFileEvent , 1000, inputEvent); // msec
+            $("#fileNameText").text("file:" + $("#inputFile")[0].files[0].name);
+            $("#result").hide();
+            
+        });
+        
+        var selectFileEvent = function(inputEvent)
+        {
+            var files =  inputEvent.target.files;
+            var fileReader = new FileReader();
+            fileReader.onload = function () {
+                $("#raw_json").val(this.result);
+                $('#dump_btn').click();
+            }
+            var file = files[0] ;
+            fileReader.readAsText(file) ;            
+        }
+
         main(); 
 });

@@ -1,4 +1,6 @@
 $(function(){
+        var latestFile = 0;
+        var latestFileName = "";
         var main = function(){
             autoSaveAndLoad("raw_json");
             $("#result").hide();

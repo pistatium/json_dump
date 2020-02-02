@@ -1,105 +1,171 @@
-body{
-    border-top: 10px solid #9CCCCC;
-    padding:10px;
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 100;
 }
 
-p{
-    line-height:160%;
-    margin-left:10px;
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 200;
 }
-textarea{
-    border:#ccc 4px solid;
-    padding-left:5px;
-    margin-left:10px;
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 300;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Medium");
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: "Yu Gothic";
+    src: local("Yu Gothic Bold");
+    font-weight: bold;
+}
+
+@font-face {
+    font-family: "Helvetica Neue";
+    src: local("Helvetica Neue Regular");
+    font-weight: 100;
+}
+
+@font-face {
+    font-family: "Helvetica Neue";
+    src: local("Helvetica Neue Regular");
+    font-weight: 200;
+}
+
+html {
+    font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", "Yu Gothic", YuGothic, Verdana, Meiryo, "M+ 1p", sans-serif;
+}
+
+@media all and (-ms-high-contrast: none) {
+    html {
+        font-family: Verdana, Meiryo, sans-serif;
+    }
+}
+
+@media all and (-ms-high-contrast: active) {
+    html {
+        font-family: Verdana, Meiryo, sans-serif;
+    }
+}
+
+body {
+    border-top: 12px solid #9CCCCC;
+    padding: 6px;
+    color: #374343;
+
+}
+
+p {
+    line-height: 160%;
+    margin-left: 12px;
+}
+
+textarea {
+    border: #ccc 4px solid;
+    padding-left: 5px;
+    margin-left: 10px;
     border-radius: 10px;
-    background:#fcfcfc;
+    background: #fcfcfc;
+    width: 100%;
+    font-family: Consolas, "Courier New", Courier, Monaco, monospace, "ＭＳ ゴシック", "MS Gothic", Osaka−等幅;
 }
-.indent{
+
+
+.indent {
+    margin: 0 0 10px 20px;
+    padding: 5px 10px;
+    border-left: 3px solid #CCCEB4;
+}
+
+.indent > .indent {
     margin: 0px 0 10px 20px;
     padding: 5px 10px;
-    border-left:3px solid #CCCEB4;
+    border-left: 3px solid #B4CEB8;
 }
-.indent > .indent{
+
+.indent > .indent > .indent {
     margin: 0px 0 10px 20px;
     padding: 5px 10px;
-    border-left:3px solid #B4CEB8;
+    border-left: 3px solid #B4C8CE;
 }
-.indent > .indent > .indent{
-    margin: 0px 0 10px 20px;
+
+.indent > .indent > .indent > .indent {
+    margin: 0 0 10px 20px;
     padding: 5px 10px;
-    border-left:3px solid #B4C8CE;
+    border-left: 3px solid #B9B4CE;
 }
-.indent > .indent > .indent > .indent{
-    margin: 0px 0 10px 20px;
+
+.indent > .indent > .indent > .indent > .indent {
+    margin: 0 0 10px 20px;
     padding: 5px 10px;
-    border-left:3px solid #B9B4CE;
+    border-left: 3px solid #CEB4C0;
 }
-.indent > .indent > .indent > .indent > .indent{
-    margin: 0px 0 10px 20px;
-    padding: 5px 10px;
-    border-left:3px solid #CEB4C0;
-}
-.key{
-    font-weight:bold;
-    min-width:100px;
-    display:inline-block;
-    line-height:100%;
+
+.key {
+    font-weight: bold;
+    min-width: 100px;
+    display: inline-block;
+    line-height: 100%;
     padding: 5px 0;
 }
 
-.key:hover{
+.key:hover {
     background: #ffd;
 }
 
 
-.val{
-    padding-left:10px;
-    display:inline-block;
-    margin-right:10px;
+.val {
+    padding-left: 10px;
+    display: inline-block;
+    margin-right: 10px;
 }
 
-.place{
-    font-size:90%;
-    color:#50A580;
-    line-height:100%;
-    display:inline-block;
+.place {
+    font-size: 90%;
+    color: #50A580;
+    line-height: 100%;
+    display: inline-block;
     margin: 0px 0 5px 0px;
     text-decoration: underline;
-    border:0px dashed;
-    width:350px;
+    border: 0px dashed;
+    width: 350px;
 }
 
-.no_val{
+.no_val {
     color: #8A8A4E !important;
 }
-.array{
+
+.array {
     color: #A55061 !important;
     padding: 0 10px;
 }
 
-.jpn_txt{
-    color:#888;
-    font-size:90%;
-}
-    
-#result{
-    padding:10px;
+#result {
+    padding: 10px;
 }
 
-#description{
-    margin-left:10px;
-    padding:10px;
+#description p{
+    margin-left: 12px;
+    padding: 6px 12px;
     border-left: 5px solid #9CCCCC;
-    width:660px; float:left;
 }
 
-.gotop{
-	position:fixed;
-	right: 0px;
-	bottom: 30px; 
-	width:100px;
+.gotop {
+    position: fixed;
+    right: 0px;
+    bottom: 30px;
+    width: 100px;
 }
-#ads{
-width:250px;
-float:left;
+
+#ads {
+    width: 250px;
+    float: left;
 }

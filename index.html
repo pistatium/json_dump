@@ -1,104 +1,74 @@
 <!DOCTYPE html>
-<html  manifest="/json_dump.appcache">
+<html manifest="/json_dump.appcache">
 <head>
-<meta charset="utf-8" />
-<title>The Fastest JSON visualizer - 最速のJSON可視化･解析ツール</title>
-<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" type="text/css">
-<link rel="stylesheet" href="json_dump.css" type="text/css">
-<link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
-<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+    <meta charset="utf-8"/>
+    <title>JSON visualizer</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css"
+          type="text/css">
+    <link rel="stylesheet" href="json_dump.css" type="text/css">
+    <link href='http://fonts.googleapis.com/css?family=Inconsolata' rel='stylesheet' type='text/css'>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
-<script src="autosave.js"></script>
-<script src="json_dump.js"></script>
+    <script src="autosave.js"></script>
+    <script src="json_dump.js"></script>
 
-<script src="gotop.js"></script>
+    <script src="gotop.js"></script>
 
-<style>
+    <style>
 
-</style>
+    </style>
 </head>
-<body><div class="container-fluid">
+<body>
+<div class="container">
     <div class="page-header">
-        <h1>The Fastest JSON visualizer <small> The tool handling JSON format.</small></h1>
-        <h1 class="jpn_txt">最速のJSON可視化･解析ツール</h1>
+        <h1>JSON visualizer</h1>
     </div>
-    
     <div class="span12">
-        <a class="btn pull-right" id="sample_btn" style="display:block; margin-bottom:5px;">
-            Try Sample JSON
-        </a>
-        
-        <textarea class="span12" id="raw_json" cols=70 rows=7 placeholder="Please copy and paste the text in JSON format here."></textarea>
+        <p class="pull-right">
+            <a type="button" class="btn" id="browse_btn"><i class="icon-file"></i> Load JSON from file</a>
+            <a class="btn" id="sample_btn">Try Sample JSON</a>
+        </p>
+        <input id="inputFile" type="file" style="display:none">
+        <textarea class="span12" id="raw_json" cols=70 rows=7
+                  placeholder="Please paste the text in JSON format here."></textarea>
         <p>
             <a class="btn btn-info" id="dump_btn">Visualize JSON</a>
             <a class="btn" id="reset_btn">Reset</a>
-            <button type="button" class="btn btn-info" id="browse_btn">Browse</button>
-            <input id="inputFile" type="file" style="display:none">
+
         </p>
-            
-    <span id="fileNameText"></span>
+
+        <span id="fileNameText"></span>
     </div>
     <br clear="all">
-        
+
     <div id="result"></div>
-    
+
     <hr>
-    <div >
+    <div>
         <div id="description">
             <h2>How To Use</h2>
             <p>
                 This service can easily view the data in the form of JSON.<br>
-                <span class="jpn_txt">このサービスはJSON形式のデータを見やすく表示します。</span><br>
                 Paste the JSON String into the box, and press the [Dump JSON] Button.<br>
-                <span class="jpn_txt">上のテキストボックスにJSONを貼り付けて、[Dump JSON]ボタンを押せば</span><br>
-                Immediately yout data is displayed in the form of easy-to-see .<br>
-                <span class="jpn_txt">即座に見やすい形で表示してくれます。</span><br>
-                Extra things such as call-back will be removed automatically.<br>
-                <span class="jpn_txt">また、コールバックなど余計なものが付いていても自動で除去します。</span><br>
-                Please use it for development, such as using the API.<br>
-                <span class="jpn_txt">APIを使った開発などにお使いください。</span><br>
-                <b>Note:</b> UTF-8 Charset Only. 
+                Immediately your JSON data is displayed in the form of easy-to-see.<br>
+                Please use it for development, such as using JSON API.<br>
+                <b>Note:</b> UTF-8 Charset Only.
             </p>
-            
-            <h2>Tips</h2>
-            <p>
-                The green part becomes the course from a root.<br>
-                <span class="jpn_txt">緑色の部分はルートからのパスになってます。</span><br>
-                If it is Javascript, You only just copy and paste it for your program.<br>
-                <span class="jpn_txt">Javascriptであればそのままコピペして使えます。</span><br>
-                If you use other script language, it gose well in the same way.<br>
-                <span class="jpn_txt">他のスクリプト言語ユーザーでも同じように構造を辿っていけば使えると思います。</span><br>
 
-                In the case of sequence, a child can furl when you click a parent-element.<br>
-                <span class="jpn_txt">配列の場合、親要素をクリックすると子が畳まれます。</span><br>
-                When JSON data are big, please use it.<br>
-                <span class="jpn_txt">JSONデータが大きい場合にご利用ください。</span><br>
-
-            </p>
-            
             <h2>System</h2>
             <p>
-                This program is only written by Javascript.<br>
-                <span class="jpn_txt">このプログラムはJavascriptのみによって書かれています。</span><br>
-                Because there is no need to send the data to an external server, you can use fast and safe.<br>
-                <span class="jpn_txt">外部のサーバーにJSONの情報を送る必要がないため、高速かつ安全に利用出来ます。</span><br>
+                This program runs without communication with the server.<br>
+                Even sensitive information JSON can be safely visualized.<br>
+                This site accesses GoogleAnalytics and GoogleAdsense, but does not use the information entered in the
+                JSON.
             </p>
-            
+
             <h2>Source</h2>
             <p>
-                 This source is hosted on <a href="https://github.com/pistatium/json_dump">GitHub</a>:
-            </p>
-            <h2>For Android</h2>
-            <p>
-                "The Fastest JSON visualizer" is available on Android.<br>
-                <span class="jpn_txt">Androidでもこの最速のJsonVisualizerが利用できます。</span><br>
-                <a href="https://play.google.com/store/apps/details?id=com.appspot.pistatium.jsonvisualizer" class="btn">
-                    <img src="http://houkago-no.appspot.com/uploadapp/icon/6248215343005696" width=50>
-                    　Download
-                </a>
+                This source is hosted on <a href="https://github.com/pistatium/json_dump">GitHub</a>:
             </p>
         </div>
-        
+
         <!-- Google Ads -->
         <div id="ads">
             <script src="google_ads.js"></script>
@@ -107,16 +77,15 @@
             <script src="google_ads.js"></script>
             <script type="text/javascript" src="http://pagead2.googlesyndication.com/pagead/show_ads.js"></script>
         </div>
-        
     </div>
+
+
 </div>
 
-<hr>
-<div class="footer">
-Copyright(c) 2011-2014 <a href="http://kimihiro-n.appspot.com">Pistatium</a>. All Rights Reserved.
-</div>
+<footer class="footer">
+    Copyright(c) 2020 <a href="http://kimihiro-n.appspot.com">Pistatium</a>.
+</footer>
 
-<div class="gotop"><a href="#top">↑Go to Top</a></div>
 </body>
 
 <!-- Google Analytics -->

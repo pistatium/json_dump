@@ -3,11 +3,11 @@ $(function(){
             autoSaveAndLoad("raw_json");
             $("#result").hide();
         }
-        
+
         $("#dump_btn").click(function(){
             var json = $("#raw_json").val();
             if (! json) {
-                alert("Before visualize, please fill json into blank above.\n解析したいJSONを入れてください。");
+                alert("Before visualize, please fill json into blank above.");
                 return ;
             }
             var result = dump(json);
@@ -18,12 +18,12 @@ $(function(){
                 setListner();
             }
         });
-        
+
         $("#reset_btn").click(function(){
             $("#raw_json").val('');
             $("#result").html('');
         });
-        
+
         $("#sample_btn").click(function(){
             var sampleJSON ='\
 {"team":"Team A","number":3,"users":[ \n\
@@ -41,10 +41,10 @@ $(function(){
                 setListner();
             }
         });
-        
+
         var getExtraParams = function(){
-            
-        
+
+
         };
         var dump = function(json){
             json = trimPadding(json);
@@ -54,28 +54,28 @@ $(function(){
             $("#raw_json").val(formatted_json);
             return makeHtml(obj);
         };
-        
+
         var trimPadding = function(jsonp){
             var match = null;
             var json_obj = '';
             var json_array = '';
-            
+
             match = jsonp.match(/\{[\s\S]*\}/);
             if(match){
                 var json_obj = match.toString();
             }
-            
+
             match = jsonp.match(/\[[\s\S]*\]/);
             if(match){
                 var json_array = match.toString()
             }
-            
+
             if (json_array.length > json_obj.length) {
                 return json_array;
             }
             return json_obj;
         }
-        
+
         var parseJSON = function(json){
             try{
                 var obj = JSON.parse(json);
@@ -85,29 +85,29 @@ $(function(){
             }
             return obj;
         }
-        
+
         var makeHtml = function(obj){
             return "<span class='key'>ROOT</span>" + _make(obj, "");
         }
-        
+
         var _make = function(obj, nest){
             if (obj == null) {
                 return "<span class='val no_val'>(null)</span>"
                      + "<span class='place'>"
-                     + nest 
+                     + nest
                      + "</span>"
                      + "<br>";
-                
+
             } else if (typeof obj == 'object') {
                 var tmp ="<span class='array'>(array)<br></span><div class='indent'>"
-                for(o in obj){ 
+                for(o in obj){
                     tmp += "<span class='key'>"
                          + o
-                         + "</span>:" 
+                         + "</span>:"
                          + _make(obj[o], nest + "['" + o + "']");
                 }
                 return tmp + "</div>";
-                
+
             } else {
                 return "<span class='val'>"
                      + _escape(obj)
@@ -141,20 +141,20 @@ $(function(){
             ch = ch.replace(/>/g,"&gt;") ;
             return ch ;
         }
-        
+
         $("#browse_btn").click(function(){
             $("#fileNameText").text("");
             $("#inputFile").val("");
             $('#inputFile').click();
-        });        
-                
+        });
+
         $("#inputFile").change(function(inputEvent) {
             let timeout_id = setTimeout(selectFileEvent , 1000, inputEvent); // msec
             $("#fileNameText").text("file:" + $("#inputFile")[0].files[0].name);
             $("#result").hide();
-            
+
         });
-        
+
         var selectFileEvent = function(inputEvent)
         {
             var files =  inputEvent.target.files;
@@ -164,8 +164,8 @@ $(function(){
                 $('#dump_btn').click();
             }
             var file = files[0] ;
-            fileReader.readAsText(file) ;            
+            fileReader.readAsText(file) ;
         }
 
-        main(); 
+        main();
 });

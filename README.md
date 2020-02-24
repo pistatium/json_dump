@@ -8,7 +8,7 @@ WebAPIなどを使う関係で必要になったので作ってみました。
 使い方
 ------
 HTML とJS製なのでファイルを設置するだけで動きます。  
-[デモ] (https://pistatium.github.io/json_dump/)
+[デモ](https://pistatium.github.io/json_dump/)
 
 JSON形式のテキストをフォームに貼り付けて、
 ｢Dump JSON｣を押せば見やすく表示してくれます。
